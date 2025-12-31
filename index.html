@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>For My Love ❤️</title>
+    <style>
+        /* Base Styles & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ff8fb1;
+            --secondary: #f8c8dc;
+            --accent: #ffd1e6;
+            --dark: #fff7fb;
+            --light: #4a3b47;
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 143, 177, 0.25);
+        }
+
+        body {
+            background: radial-gradient(1200px 800px at 10% 10%, #fff0f6 0%, transparent 60%),
+                        radial-gradient(1000px 700px at 90% 20%, #ffe0ec 0%, transparent 55%),
+                        linear-gradient(135deg, #fff7fb 0%, #ffe6f1 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll Snap */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', serif;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(255, 107, 158, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--light);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 6px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(255, 143, 177, 0.3);
+        }
+        h2:before {
+            content: '🎀';
+            position: absolute;
+            top: -32px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-6deg);
+            font-size: 1.4rem;
+            filter: drop-shadow(0 2px 2px rgba(255, 143, 177, 0.35));
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: rgba(74, 59, 71, 0.9);
+        }
+
+        /* Glassmorphism Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 143, 177, 0.35);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: 0 10px 30px rgba(255, 143, 177, 0.15);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9fbe, #f8c8dc);
+            color: #4a3b47;
+            padding: 0.85rem 2rem;
+            border: 1px solid rgba(255, 143, 177, 0.6);
+            border-radius: 999px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 1rem 0;
+            box-shadow: 0 8px 24px rgba(255, 143, 177, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #f8c8dc, #ff9fbe);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover:before {
+            opacity: 1;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Intro Section */
+        #intro {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Story Timeline */
+        #story {
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--glass-border);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            transform: translateX(20px);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            transform: translateX(-20px);
+        }
+        .timeline-item.visible .timeline-content {
+            transform: translateX(0);
+        }
+
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 50%;
+            margin-top: -10px; /* Half of height to center vertically */
+            right: -10px;
+            box-shadow: 0 0 0 4px rgba(255, 107, 158, 0.3);
+        }
+
+        .timeline-item:nth-child(even):after {
+            left: -10px;
+            right: auto;
+        }
+
+        .timeline-content h3 {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .timeline-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-img:hover {
+            transform: scale(1.03);
+        }
+
+        /* Secret Message */
+        #secret-message {
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #fff0f6 0%, #ffe6f1 100%);
+        }
+
+        .secret-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .message {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            display: none;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        /* Photo Gallery */
+        #gallery {
+            background: linear-gradient(135deg, #fff7fb 0%, #ffe6f1 100%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            box-shadow: 0 10px 30px rgba(255, 143, 177, 0.18);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 143, 177, 0.25);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(255, 240, 246, 0.95), rgba(255, 240, 246, 0.2));
+            color: #4a3b47;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            font-weight: 600;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Final Section */
+        #final {
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #ffe6f1 0%, #fff0f6 100%);
+        }
+
+        .final-text {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin: 2rem 0;
+            line-height: 1.4;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 107, 158, 0.5);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(255, 107, 158, 0.8);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+
+        /* Floating Elements */
+        .floating {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            color: var(--primary);
+            font-size: 1.5rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .sparkle {
+            color: var(--accent);
+            font-size: 1rem;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        /* Music Toggle */
+        .music-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 143, 177, 0.35);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(255, 143, 177, 0.25);
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .music-icon {
+            font-size: 1.5rem;
+            color: var(--light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline:before {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item:after {
+                left: 21px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                transform: none;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            opacity: 0;
+            z-index: 9999;
+            pointer-events: none;
+            animation: confetti-fall 5s linear forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Section -->
+    <section id="intro">
+        <div class="floating heart" style="top: 10%; left: 10%;">❤️</div>
+        <div class="floating heart" style="top: 20%; right: 15%;">💖</div>
+        <div class="floating heart" style="top: 70%; left: 15%;">💝</div>
+        <div class="floating heart" style="top: 80%; right: 10%;">💘</div>
+        <div class="floating sparkle" style="top: 30%; left: 20%;">✨</div>
+        <div class="floating sparkle" style="top: 60%; right: 25%;">✨</div>
+        
+        <div class="container intro-content">
+            <h1>Happy New Year My Yza 🎆</h1>
+            <p class="subtitle">A journey of our love through the years</p>
+            <a href="#story" class="btn">Our Story</a>
+        </div>
+    </section>
+
+    <!-- Our Story Timeline -->
+    <section id="story">
+        <div class="container">
+            <h2>Our Beautiful Journey</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>How We Met</h3>
+                        <!-- <p>That magical moment when our eyes first met and our hearts skipped a beat. I'll never forget how you smiled at me that day, and how my world suddenly became brighter.</p> -->
+                        <img src="images/pic1.jpg" alt="Our first meeting" class="timeline-img">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Our First Date</h3>
+                        <!-- <p>Remember our first date? The way you laughed at my jokes (even the bad ones) and how time just flew by. That was the moment I knew there was something special between us.</p> -->
+                        <img src="images/pic2.jpg" alt="Our first date" class="timeline-img">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Growing Together</h3>
+                        <!-- <p>Every moment with you has been an adventure. Through ups and downs, we've grown stronger together. Your love has been my greatest blessing.</p> -->
+                        <img src="images/pic3.jpg" alt="Growing together" class="timeline-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secret Message -->
+    <section id="secret-message">
+        <div class="container secret-content">
+            <h2>A Special Message For You</h2>
+            <button id="secretBtn" class="btn">Open Secret Message</button>
+            
+            <div id="message" class="message"> 
+                <h3>Yza,</h3>
+                <p>
+                    As this new year begins, I just want you to know how thankful I am that I get to walk into another year with <b>you</b>. Out of all the people in this world, I’m still grateful that it’s your hand I get to hold and your voice I get to hear each day.
+                </p>
+                <p>
+                    I smile every time I remember that each time i cook for you and you patiently wait for me to serve it. Those little moments may seem simple, but to me, they’re everything because i want to provide for you. They’re the memories I go back to whenever I miss you or need to feel close to you.
+                </p>
+                <p>
+                    You’ve seen my good days, my bad days, and even the days when I wasn’t easy to love and yet you stayed. Your patience, your care, and the way you understand me without me having to explain everything still amazes me. Because of you, I want to grow, improve, and become the man you deserve.
+                </p>
+                <p>
+                    This year, and in all the years that follow, I promise to choose you not just when it’s easy, but even when it’s hard. I promise to stand beside you, to protect your heart, to support your dreams, and to love you in the quiet moments and the loud ones too.
+                </p>
+                <p>
+                    Thank you for being my safe place, my favorite person, and my lightning rod. My love for you goes deeper than words can explain, and it only continues to grow.
+                </p>
+                <p>
+                    Forever yours,<br>
+                    <b>Leo Galvan Llarenas</b>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section id="gallery">
+        <div class="container">
+            <h2>Our Memories</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be added by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section id="final">
+        <div class="container">
+            <h2>Mas minamahal kita sa bawat araw na lumilipas</h2>
+            <p class="final-text">Will you still be my forever in 2026?</p>
+            <p class="final-text">And every year after that?</p>
+            <div class="floating heart" style="font-size: 3rem; animation: float 4s ease-in-out infinite;">💖</div>
+        </div>
+    </section>
+
+    <!-- Music Toggle -->
+    <div class="music-toggle" id="musicToggle" title="Toggle Music">
+        <div class="music-icon">🎵</div>
+    </div>
+
+    <!-- Audio Element (hidden) -->
+    <audio id="bgMusic" loop autoplay muted>
+        <source src="audio/romantic_music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const secretBtn = document.getElementById('secretBtn');
+            const message = document.getElementById('message');
+            const musicToggle = document.getElementById('musicToggle');
+            const bgMusic = document.getElementById('bgMusic');
+            const galleryGrid = document.getElementById('galleryGrid');
+            
+            // Sample gallery images (replace with your own)
+            const galleryImages = [
+                { src: 'images/pic4.jpg', caption: 'Our first photo together' },
+                { src: 'images/pic5.jpg', caption: 'A perfect day' },
+                { src: 'images/pic6.jpg', caption: 'Forever in your arms' },
+                { src: 'images/pic7.jpg', caption: 'Laughing together' },
+                { src: 'images/pic8.jpg', caption: 'Sunset moments' },
+                { src: 'images/pic9.jpg', caption: 'You and me' }
+            ];
+
+            // Create gallery items
+            function createGallery() {
+                galleryImages.forEach((item, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <img src="${item.src}" alt="${item.caption}" class="gallery-img">
+                        <div class="gallery-caption">${item.caption}</div>
+                    `;
+                    galleryGrid.appendChild(galleryItem);
+                    
+                    // Add animation delay
+                    galleryItem.style.animationDelay = `${index * 0.1}s`;
+                });
+            }
+
+            // Create confetti effect
+            function createConfetti() {
+                const colors = ['#ff6b9e', '#9c6bff', '#ff8e3c', '#6bc5ff'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Random properties
+                    const size = Math.random() * 10 + 5;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const left = Math.random() * 100;
+                    const animationDuration = Math.random() * 3 + 2;
+                    const delay = Math.random() * 5;
+                    
+                    // Apply styles
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    confetti.style.backgroundColor = color;
+                    confetti.style.left = `${left}%`;
+                    confetti.style.animationDuration = `${animationDuration}s`;
+                    confetti.style.animationDelay = `${delay}s`;
+                    
+                    // Add to body
+                    document.body.appendChild(confetti);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, (animationDuration + delay) * 1000);
+                }
+            }
+
+            // Toggle secret message
+            secretBtn.addEventListener('click', function() {
+                message.style.display = message.style.display === 'block' ? 'none' : 'block';
+                
+                if (message.style.display === 'block') {
+                    // Create confetti when message is shown
+                    createConfetti();
+                    secretBtn.textContent = 'Hide Message';
+                } else {
+                    secretBtn.textContent = 'Open Secret Message';
+                }
+            });
+
+            // Enable sound on first user interaction
+            const enableSound = () => {
+                bgMusic.muted = false;
+                musicToggle.querySelector('.music-icon').textContent = '🎵';
+                musicToggle.setAttribute('title', 'Pause Music');
+                document.removeEventListener('click', enableSound);
+                document.removeEventListener('touchstart', enableSound);
+            };
+            document.addEventListener('click', enableSound);
+            document.addEventListener('touchstart', enableSound);
+
+            // Toggle background music
+            musicToggle.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering enableSound
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    musicToggle.querySelector('.music-icon').textContent = '🎵';
+                    musicToggle.setAttribute('title', 'Pause Music');
+                } else {
+                    bgMusic.pause();
+                    musicToggle.querySelector('.music-icon').textContent = '🔇';
+                    musicToggle.setAttribute('title', 'Play Music');
+                }
+            });
+
+            // Start playing (muted) on page load
+            bgMusic.play().catch(e => console.log('Auto-play prevented:', e));
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe timeline items
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                observer.observe(item);
+            });
+
+            // Create floating elements
+            function createFloatingElements() {
+                const container = document.querySelector('body');
+                const emojis = ['❤️', '💖', '💝', '💘', '💓', '💕', '💗', '💞', '💟'];
+                
+                for (let i = 0; i < 15; i++) {
+                    const element = document.createElement('div');
+                    const isHeart = Math.random() > 0.3;
+                    const emoji = isHeart 
+                        ? emojis[Math.floor(Math.random() * emojis.length)]
+                        : '✨';
+                    
+                    element.className = `floating ${isHeart ? 'heart' : 'sparkle'}`;
+                    element.textContent = emoji;
+                    
+                    // Random position
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const delay = Math.random() * 5;
+                    const duration = 3 + Math.random() * 4;
+                    
+                    element.style.left = `${posX}%`;
+                    element.style.top = `${posY}%`;
+                    element.style.animationDelay = `${delay}s`;
+                    element.style.animationDuration = `${duration}s`;
+                    
+                    container.appendChild(element);
+                }
+            }
+
+            // Initialize
+            createGallery();
+            createFloatingElements();
+            
+            // // Make sure all timeline items start hidden
+            // document.querySelectorAll('.timeline-item').forEach(item => {
+            //     item.style.opacity = '0';
+            // });
+            
+            // Show first timeline item immediately
+            const firstTimelineItem = document.querySelector('.timeline-item');
+            if (firstTimelineItem) {
+                firstTimelineItem.classList.add('visible');
+                // firstTimelineItem.style.opacity = '1';
+            }
+            
+            // Add scroll snapping behavior
+            document.body.style.scrollSnapType = 'y mandatory';
+            document.querySelectorAll('section').forEach(section => {
+                section.style.scrollSnapAlign = 'start';
+            });
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add a subtle parallax effect to the intro section
+            window.addEventListener('mousemove', (e) => {
+                const x = (window.innerWidth / 2 - e.pageX) / 50;
+                const y = (window.innerHeight / 2 - e.pageY) / 50;
+                const intro = document.getElementById('intro');
+                if (intro) {
+                    intro.style.backgroundPosition = `${x}px ${y}px`;
+                }
+            });
+            
+            // Add a subtle glow to the final section text
+            const finalTexts = document.querySelectorAll('.final-text');
+            finalTexts.forEach((text, index) => {
+                text.style.animation = `glow 2s ease-in-out infinite alternate ${index * 0.5}s`;
+            });
+        });
+    </script>
+</body>
+</html>
